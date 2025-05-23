@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Medical Guidance | SelfLevelling</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #ffc527;
+      --primary-dark: #e6b121;
+      --dark: #111111;
+      --darker: #000000;
+      --light: #f5f5f5;
+      --gray: #888888;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background-color: var(--darker);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo h1 {
+      color: var(--white);
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .arrow-icon {
+      color: var(--primary);
+      font-size: 24px;
+      margin-left: 10px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .main-menu {
+      display: flex;
+    }
+
+    .main-menu li {
+      position: relative;
+      margin: 0 15px;
+    }
+
+    .main-menu li a {
+      font-weight: 500;
+      padding: 10px 0;
+      color: var(--white);
+      position: relative;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .main-menu li a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .main-menu li a:hover:after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 200px;
+      background-color: var(--darker);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 100;
+      border-radius: 5px;
+      padding: 10px 0;
+    }
+
+    .main-menu li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    .dropdown li a:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .main-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--darker);
+        padding: 20px 0;
+      }
+
+      .main-menu.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+    }
+
+    /* Content styles */
+    .content-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: var(--darker);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 197, 39, 0.7);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .back-home {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 0;
+      padding: 10px 25px;
+      background-color: var(--primary);
+      color: var(--dark);
+      font-weight: bold;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .back-home:hover {
+      background-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">
+          <h1>Self-<span>Levelling</span></h1>
+        </a>
+        <div class="arrow-icon">
+          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav>
+        <ul class="main-menu" id="mainMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="About.HTML">About</a></li>
+          <li>
+            <a href="Fitness Tools.html">Fitness tools</a>
+            <ul class="dropdown">
+              <li><a href="bmi.html">BMI Calculator</a></li>
+              <li><a href="calorie.html">Calorie Calculator</a></li>
+              <li><a href="workout.html">Workout Plans</a></li>
+              <li><a href="nutrition.html">Nutrition & Diet</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="support.html">Support</a>
+            <ul class="dropdown">
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="privacyandpolicy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="assessment.html">Assessment</a>
+            <ul class="dropdown">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="login.html">Login</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content-container">
+    <h2>Exercise Guidance for Users with Medical Conditions</h2>
+    <p>
+      If you have a medical condition, it's important to approach exercise with caution and prioritize your health.
+      Here are some recommended types of physical activity that are generally safe and beneficial:
+    </p>
+    <ul>
+      <li>Daily gentle walks to improve circulation and mobility.</li>
+      <li>Water aerobics or swimming for low-impact cardio without joint strain.</li>
+      <li>Stretching exercises and light yoga to enhance flexibility and reduce tension.</li>
+      <li>Using a stationary bike at a slow pace to build endurance safely.</li>
+    </ul>
+    <p>
+      Always consult with your healthcare provider before starting any new exercise routine to ensure it's appropriate for your specific condition.
+    </p>
+
+    <a href="index.html" class="back-home">Return to Home</a>
+  </div>
+
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainMenu = document.getElementById('mainMenu');
+
+    mobileToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
