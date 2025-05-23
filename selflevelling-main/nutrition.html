@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nutrition & Diet | SelfLevelling</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #ffc527;
+      --primary-dark: #e6b121;
+      --dark: #111111;
+      --darker: #000000;
+      --light: #f5f5f5;
+      --gray: #888888;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background-color: var(--darker);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo h1 {
+      color: var(--white);
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .arrow-icon {
+      color: var(--primary);
+      font-size: 24px;
+      margin-left: 10px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .main-menu {
+      display: flex;
+    }
+
+    .main-menu li {
+      position: relative;
+      margin: 0 15px;
+    }
+
+    .main-menu li a {
+      font-weight: 500;
+      padding: 10px 0;
+      color: var(--white);
+      position: relative;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .main-menu li a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .main-menu li a:hover:after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 200px;
+      background-color: var(--darker);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 100;
+      border-radius: 5px;
+      padding: 10px 0;
+    }
+
+    .main-menu li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    .dropdown li a:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .main-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--darker);
+        padding: 20px 0;
+      }
+
+      .main-menu.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+    }
+
+    /* Content styles */
+    .content-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: var(--darker);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 197, 39, 0.7);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    /* Activity levels boxes */
+    .activity-levels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .box {
+      flex: 1 1 calc(50% - 15px);
+      border: 2px solid var(--primary);
+      padding: 20px;
+      border-radius: 8px;
+      background-color: var(--darker);
+      color: var(--white);
+      font-weight: 600;
+      text-align: left;
+      box-shadow: 0 0 10px var(--primary);
+      min-width: 300px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .box:hover, .box.selected {
+      background-color: var(--primary);
+      color: var(--dark);
+      box-shadow: 0 0 20px var(--primary-dark);
+    }
+
+    .box h3 {
+      margin-bottom: 10px;
+      color: inherit;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .box p {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.3;
+      color: inherit;
+      margin-bottom: 6px;
+    }
+
+    .box .examples {
+      font-style: italic;
+      font-weight: 500;
+      color: inherit;
+      margin-bottom: 6px;
+    }
+
+    .box .calories {
+      font-weight: 700;
+      font-size: 15px;
+      margin-top: auto;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        flex: 1 1 100%;
+        min-width: auto;
+      }
+    }
+
+    /* Result display area */
+    #result {
+      margin-top: 40px;
+      padding: 20px;
+      border: 2px solid var(--primary);
+      border-radius: 10px;
+      background-color: var(--darker);
+      color: var(--white);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    #result h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    #result p {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .back-home {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 0;
+      padding: 10px 25px;
+      background-color: var(--primary);
+      color: var(--dark);
+      font-weight: bold;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .back-home:hover {
+      background-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="REPORT.HTML">
+          <h1>Self-<span>Levelling</span></h1>
+        </a>
+        <div class="arrow-icon">
+          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav>
+        <ul class="main-menu" id="mainMenu">
+          <li><a href="REPORT.HTML">Home</a></li>
+          <li><a href="About.HTML">About</a></li>
+          <li>
+            <a href="Fitness Tools.html">Fitness tools</a>
+            <ul class="dropdown">
+              <li><a href="bmi.html">BMI Calculator</a></li>
+              <li><a href="calorie.html">Calorie Calculator</a></li>
+              <li><a href="workout.html">Workout Plans</a></li>
+              <li><a href="nutrition.html">Nutrition & Diet</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="support.html">Support</a>
+            <ul class="dropdown">
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="privacyandpolicy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="assessment.html">Assessment</a>
+            <ul class="dropdown">
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="login.html">Login</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content-container">
+    <h2>Nutrition & Diet Recommendations</h2>
+    <p>
+      Choose the activity level that best fits your daily routine. Below each category you'll find examples of typical activities and estimated daily calorie intake.
+    </p>
+
+    <div class="activity-levels" id="activityLevels">
+      <div class="box" data-level="sedentary">
+        <h3>Sedentary</h3>
+        <p>Little or no exercise, mostly sitting during the day.</p>
+        <p class="examples">Examples: Desk job, watching TV, light household chores like dusting.</p>
+        <p class="calories">Estimated Calorie Intake: 1,600 - 2,000 kcal/day</p>
+      </div>
+
+      <div class="box" data-level="lightly-active">
+        <h3>Lightly active</h3>
+        <p>Light exercise or sports 1-3 days per week.</p>
+        <p class="examples">Examples: Walking 30 min/day, light gardening, casual bike rides.</p>
+        <p class="calories">Estimated Calorie Intake: 1,800 - 2,200 kcal/day</p>
+      </div>
+
+      <div class="box" data-level="moderately-active">
+        <h3>Moderately active</h3>
+        <p>Moderate exercise or sports 3-5 days per week.</p>
+        <p class="examples">Examples: Gym workouts, brisk walking, recreational sports like tennis or swimming.</p>
+        <p class="calories">Estimated Calorie Intake: 2,000 - 2,600 kcal/day</p>
+      </div>
+
+      <div class="box" data-level="very-active">
+        <h3>Very active</h3>
+        <p>Hard exercise or sports 6-7 days per week.</p>
+        <p class="examples">Examples: Intense gym sessions, running, competitive sports like soccer or basketball.</p>
+        <p class="calories">Estimated Calorie Intake: 2,400 - 3,000 kcal/day</p>
+      </div>
+
+      <div class="box" data-level="super-active">
+        <h3>Super active</h3>
+        <p>Very hard exercise & physical job or training twice per day.</p>
+        <p class="examples">Examples: Professional athletes, heavy manual labor, twice daily training sessions.</p>
+        <p class="calories">Estimated Calorie Intake: 3,000+ kcal/day</p>
+      </div>
+    </div>
+
+    <div id="result" style="display:none;">
+      <h3>Your Personalized Recommendations</h3>
+      <p id="calorieRec"></p>
+      <p id="dietRec"></p>
+      <p id="exerciseRec"></p>
+    </div>
+
+    <a href="REPORT.HTML" class="back-home">Return to Home</a>
+  </div>
+
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainMenu = document.getElementById('mainMenu');
+
+    mobileToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('active');
+    });
+
+    // Data for recommendations per activity level
+    const recommendations = {
+      "sedentary": {
+        calories: "1,600 - 2,000 kcal/day",
+        diet: "Focus on balanced meals with controlled portions to avoid weight gain. Emphasize vegetables, lean proteins, and whole grains. Limit sugary and processed foods.",
+        exercise: "Try light activities like walking 15-30 minutes daily or gentle stretching to improve mobility."
+      },
+      "lightly-active": {
+        calories: "1,800 - 2,200 kcal/day",
+        diet: "Maintain a balanced diet rich in fruits, vegetables, whole grains, and lean proteins. Include healthy fats and hydrate well.",
+        exercise: "Include light to moderate cardio such as brisk walking or cycling 3 times a week."
+      },
+      "moderately-active": {
+        calories: "2,000 - 2,600 kcal/day",
+        diet: "Ensure adequate protein intake to support muscle recovery. Include complex carbs for energy and healthy fats.",
+        exercise: "Aim for moderate-intensity workouts 4-5 days per week including strength training and cardio."
+      },
+      "very-active": {
+        calories: "2,400 - 3,000 kcal/day",
+        diet: "Eat nutrient-dense meals to fuel intense training sessions. Prioritize carbs and proteins and stay hydrated.",
+        exercise: "Engage in daily intense workouts combining cardio, strength, and flexibility training."
+      },
+      "super-active": {
+        calories: "3,000+ kcal/day",
+        diet: "High calorie intake focusing on carbs, proteins, and fats. Frequent meals and snacks to maintain energy levels and support recovery.",
+        exercise: "Multiple training sessions per day with a mix of endurance, strength, and sport-specific drills."
+      }
+    };
+
+    const boxes = document.querySelectorAll('.box');
+    const resultDiv = document.getElementById('result');
+    const calorieRec = document.getElementById('calorieRec');
+    const dietRec = document.getElementById('dietRec');
+    const exerciseRec = document.getElementById('exerciseRec');
+
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        // Remove 'selected' class from all
+        boxes.forEach(b => b.classList.remove('selected'));
+
+        // Add selected to clicked box
+        box.classList.add('selected');
+
+        const level = box.getAttribute('data-level');
+        const rec = recommendations[level];
+
+        // Show result area
+        resultDiv.style.display = 'block';
+
+        calorieRec.textContent = `Calorie Intake Recommendation: ${rec.calories}`;
+        dietRec.textContent = `Diet Suggestion: ${rec.diet}`;
+        exerciseRec.textContent = `Exercise Suggestion: ${rec.exercise}`;
+
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

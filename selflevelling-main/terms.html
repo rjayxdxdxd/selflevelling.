@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms & Conditions | Self-Levelling</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #ffc527;
+      --dark: #111111;
+      --darker: #000000;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    header {
+      background-color: var(--darker);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo h1 {
+      color: var(--white);
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .arrow-icon {
+      color: var(--primary);
+      font-size: 24px;
+      margin-left: 10px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .main-menu {
+      display: flex;
+    }
+
+    .main-menu li {
+      position: relative;
+      margin: 0 15px;
+    }
+
+    .main-menu li a {
+      font-weight: 500;
+      padding: 10px 0;
+      color: var(--white);
+      position: relative;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .main-menu li a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .main-menu li a:hover:after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 200px;
+      background-color: var(--darker);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 100;
+      border-radius: 5px;
+      padding: 10px 0;
+    }
+
+    .main-menu li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .dropdown li a:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .terms-content {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #1c1c1c;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 197, 39, 0.3);
+    }
+
+    .terms-content h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .terms-content h3 {
+      margin-top: 20px;
+      color: #ffc527;
+      font-size: 20px;
+    }
+
+    .terms-content ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    .terms-content ul li {
+      margin-bottom: 8px;
+    }
+
+    .terms-content p {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-container">
+    <div class="logo">
+      <a href="REPORT.HTML"><h1>Self-<span>Levelling</span></h1></a>
+      <div class="arrow-icon">
+        <i class="fas fa-chevron-right"></i>
+        <i class="fas fa-chevron-right"></i>
+        <i class="fas fa-chevron-right"></i>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
+    <nav>
+      <ul class="main-menu">
+        <li><a href="REPORT.HTML">Home</a></li>
+        <li><a href="About.HTML">About</a></li>
+        <li>
+          <a href="Fitness Tools.html">Fitness tools</a>
+          <ul class="dropdown">
+            <li><a href="bmi.html">BMI Calculator</a></li>
+            <li><a href="calorie.html">Calorie Calculator</a></li>
+            <li><a href="workout.html">Workout Plans</a></li>
+            <li><a href="nutrition.html">Nutrition & Diet</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="support.html">Support</a>
+          <ul class="dropdown">
+            <li><a href="faqs.html">FAQs</a></li>
+            <li><a href="privacyandpolicy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="assessment.html">Assessment</a>
+          <ul class="dropdown">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="terms-content">
+  <h2>Terms & Conditions</h2>
+
+  <p><strong>Effective Date:</strong> May 23, 2025</p>
+
+  <p>Welcome to <strong>Self-Levelling</strong>! These Terms and Conditions (“Terms”) govern your access to and use of our website, content, tools, and services (collectively, the “Service”). By using our Service, you agree to be bound by these Terms.</p>
+
+  <h3>1. Use of Our Service</h3>
+  <p>You must be at least 13 years old to use this website. By using the Service, you affirm that you are of legal age to form a binding contract or have the consent of a parent or guardian.</p>
+  <p>Self-Levelling is intended to support personal health and wellness goals. However, we do not provide medical advice. Always consult a physician or qualified health provider before starting any fitness, diet, or health program.</p>
+
+  <h3>2. User Accounts</h3>
+  <p>To access certain features (such as assessments or progress tracking), you may be required to create an account. You are responsible for maintaining the confidentiality of your login information and all activities that occur under your account.</p>
+
+  <h3>3. Prohibited Conduct</h3>
+  <p>You agree not to:</p>
+  <ul>
+    <li>Use the Service for unlawful purposes or in violation of any applicable law</li>
+    <li>Upload or distribute viruses or any malicious code</li>
+    <li>Use automated systems to access or interact with the Service</li>
+    <li>Infringe on the rights of others, including privacy and intellectual property rights</li>
+  </ul>
+
+  <h3>4. Intellectual Property</h3>
+  <p>All content on the Self-Levelling website, including text, graphics, logos, images, tools, and design, is the property of Self-Levelling and is protected by intellectual property laws. You may not copy, modify, distribute, or exploit any content without written permission.</p>
+
+  <h3>5. Third-Party Links</h3>
+  <p>Our site may contain links to third-party websites or services that are not owned or controlled by Self-Levelling. We are not responsible for the content, policies, or practices of any third-party websites.</p>
+
+  <h3>6. Disclaimer of Warranties</h3>
+  <p>The Service is provided “as is” and “as available.” We make no warranties or representations regarding the availability, reliability, or accuracy of the information and tools provided. Your use of the Service is at your own risk.</p>
+
+  <h3>7. Limitation of Liability</h3>
+  <p>To the maximum extent permitted by law, Self-Levelling shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.</p>
+
+  <h3>8. Modifications</h3>
+  <p>We reserve the right to modify or replace these Terms at any time. It is your responsibility to check this page periodically for updates. Continued use of the Service after changes means you accept the updated Terms.</p>
+
+  <h3>9. Termination</h3>
+  <p>We may suspend or terminate your access to the Service at any time without notice if we believe you have violated these Terms.</p>
+
+  <h3>10. Contact Us</h3>
+  <p>If you have any questions about these Terms, please contact us at <a href="mailto:support@selflevelling.com">support@selflevelling.com</a>.</p>
+
+  <p>Thank you for choosing Self-Levelling!</p>
+</div>
+
+</body>
+</html>

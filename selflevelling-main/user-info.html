@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>User Information</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ffc527;
+            --primary-dark: #e6b121;
+            --dark: #111111;
+            --darker: #000000;
+            --light: #f5f5f5;
+            --gray: #888888;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--darker);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            color: var(--white);
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .arrow-icon {
+            color: var(--primary);
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .main-menu {
+            display: flex;
+        }
+        
+        .main-menu li {
+            position: relative;
+            margin: 0 15px;
+        }
+        
+        .main-menu li a {
+            font-weight: 500;
+            padding: 10px 0;
+            color: var(--white);
+            position: relative;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .main-menu li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .main-menu li a:hover:after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            background-color: var(--darker);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 100;
+            border-radius: 5px;
+            padding: 10px 0;
+        }
+        
+        .main-menu li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown li {
+            margin: 0;
+        }
+        
+        .dropdown li a {
+            display: block;
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+        
+        .dropdown li a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--white);
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .arrow-decoration {
+            color: var(--primary);
+            font-size: 30px;
+            position: absolute;
+        }
+        
+        .arrow-top-right {
+            top: 80px;
+            right: 50px;
+        }
+        
+        .arrow-bottom-right {
+            bottom: 80px;
+            right: 50px;
+        }
+        
+        .journey-text {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            transform: rotate(-5deg);
+        }
+        
+        .journey-text p {
+            color: var(--primary);
+            font-family: 'Segoe Script', cursive;
+            font-size: 32px;
+            line-height: 1.2;
+        }
+        
+        .curved-arrow {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--primary);
+            border-top: none;
+            border-left: none;
+            border-radius: 0 0 20px 0;
+            transform: rotate(45deg);
+            right: 30px;
+            bottom: 30px;
+        }
+        
+        /* Contact Bar */
+        .contact-bar {
+            background-color: var(--primary);
+            padding: 20px 0;
+            color: var(--dark);
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .contact-item span {
+            font-weight: 500;
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: var(--darker);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h3 {
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            padding: 30px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-icon {
+            color: var(--primary);
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .feature-link {
+            color: var(--primary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .feature-link i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        .tools-preview {
+            padding: 80px 0;
+            background-color: var(--dark);
+        }
+        
+        .tools-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .tool-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: var(--dark);
+        }
+        
+        .tool-card h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .tool-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .tool-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: 5px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .tool-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/api/placeholder/1200/600') no-repeat center center/cover;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-content h3 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-content span {
+            color: var(--primary);
+        }
+        
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: var(--gray);
+        }
+        
+        footer {
+            background-color: var(--darker);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 992px) {
+            .main-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--darker);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            .main-menu.active {
+                display: flex;
+            }
+            
+            .main-menu li {
+                margin: 10px 20px;
+            }
+            
+            .dropdown {
+                position: static;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                display: none;
+                padding: 0;
+                margin-top: 10px;
+            }
+            
+            .dropdown.active {
+                display: block;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+                text-align: center;
+            }
+            
+            .hero p {
+                margin: 0 auto 30px;
+            }
+            
+            .journey-text {
+                display: none;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .account-menu {
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background-color: var(--darker);
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                display: none;
+            }
+            
+            .account-menu.active {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .account-menu a {
+                margin: 5px 0;
+            }
+            
+            .hero h2 {
+                font-size: 42px;
+            }
+            
+            .curved-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="REPORT.HTML">
+                    <h1>Self-<span>Levelling</span></h1>
+                </a>
+                <div class="arrow-icon">
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul class="main-menu" id="mainMenu">
+                    <li><a href="REPORT.HTML">Home</a></li>
+                    <li><a href="About.HTML">About</a></li>
+                    <li>
+                        <a href="Fitness Tools.html">Fitness tools</a>
+                        <ul class="dropdown">
+                            <li><a href="bmi.html">BMI Calculator</a></li>
+                            <li><a href="calorie.html">Calorie Calculator</a></li>
+                            <li><a href="workout.html">Workout Plans</a></li>
+                            <li><a href="nutrition.html">Nutrition & Diet</a></li>
+                        </ul>
+                    </li>
+                    <li>    
+                    <a href="support.html">Support</a>
+                        <ul class="dropdown">
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="privacyandpolicy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                        </ul>
+                    <li><a href="assessment.html">Assessment</a></li>
+                </ul>
+
+            </nav>
+        </div>
+    </header>
+
+  <div class="user-info-container">
+    <h2>Please Provide Your Details</h2>
+    <form id="userInfoForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="10" max="120" required />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="medicalCondition">Medical Condition (if any):</label>
+      <select id="medicalCondition" name="medicalCondition" required>
+        <option value="None">None</option>
+        <option value="Diabetes">Diabetes</option>
+        <option value="Heart Disease">Heart Disease</option>
+        <option value="Asthma">Asthma</option>
+        <option value="Arthritis">Arthritis</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <button type="submit">Continue</button>
+    </form>
+
+    <div id="tipsSection" class="tips" style="display:none;">
+      <h3>Important Fitness Tips</h3>
+      <p>Since you have a medical condition, here are some safe tips to help you achieve your ideal physique:</p>
+      <ul>
+        <li>Consult your healthcare provider before starting any new fitness plan.</li>
+        <li>Focus on low-impact exercises like walking, swimming, or cycling.</li>
+        <li>Maintain a balanced diet rich in nutrients tailored to your condition.</li>
+        <li>Stay hydrated and rest adequately.</li>
+        <li>Listen to your body and avoid overexertion.</li>
+      </ul>
+      <button id="returnHomeBtn" style="margin-top: 20px; background-color: var(--primary-dark); color: var(--dark); border:none; padding:10px 20px; border-radius: 25px; cursor:pointer;">Return to Home</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('userInfoForm');
+    const tipsSection = document.getElementById('tipsSection');
+    const returnHomeBtn = document.getElementById('returnHomeBtn');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const medicalCondition = form.medicalCondition.value;
+
+      if (medicalCondition === 'None') {
+        sessionStorage.setItem('userName', form.name.value);
+        sessionStorage.setItem('userAge', form.age.value);
+        sessionStorage.setItem('userGender', form.gender.value);
+        sessionStorage.setItem('userMedicalCondition', medicalCondition);
+
+        window.location.href = 'assessment.html';
+      } else {
+        form.style.display = 'none';
+        tipsSection.style.display = 'block';
+
+        sessionStorage.setItem('userName', form.name.value);
+        sessionStorage.setItem('userAge', form.age.value);
+        sessionStorage.setItem('userGender', form.gender.value);
+        sessionStorage.setItem('userMedicalCondition', medicalCondition);
+      }
+    });
+
+    returnHomeBtn.addEventListener('click', () => {
+      window.location.href = 'REPORT.HTML';
+    });
+  </script>
+</body>
+</html>
